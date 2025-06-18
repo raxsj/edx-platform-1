@@ -194,7 +194,10 @@ def _assets_json(request, course_key):
     '''
     request_options = _parse_request_to_dictionary(request)
 
-    filter_parameters = {}
+    user_language = request.LANGUAGE_CODE
+    filter_parameters = {
+        'user_language': user_language if user_language else 'en',
+    }
 
     if request_options['requested_asset_type']:
         filters_are_invalid_error = _get_error_if_invalid_parameters(request_options['requested_asset_type'])
